@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Serie</title>
+</head>
+<body>
+<div class="container" layout:fragment="conteudo">
+    <h1>Edição de Series</h1>
+    <form th:action="@{/serie/editar}" method="post" th:object="${serie}">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label class="form-label">NOME</label>
+            <input type="text" th:field="*{nome}" class="form-control" required>
+            <p th:if="${#fields.hasErrors('nome')}" class="text text-danger"
+               th:errors="*{nome}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">GENERO</label>
+            <input type="text" th:field="*{genero}" class="form-control" required>
+            <p th:if="${#fields.hasErrors('genero')}" class="text text-danger"
+               th:errors="*{genero}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ANO DE LANÇAMENTO</label>
+            <input type="text" th:field="*{anoLancamento}" class="form-control" required>
+            <p th:if="${#fields.hasErrors('anoLancamento')}" class="text text-danger"
+               th:errors="*{anoLancamento}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">QUANTIDADE DE TEMPORADAS</label>
+            <input type="text" th:field="*{quantidadeTemporadas}" class="form-control" required>
+            <p th:if="${#fields.hasErrors('quantidadeTemporadas')}" class="text text-danger"
+               th:errors="*{quantidadeTemporadas}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">CLASSIFICACAO INDICATIVA</label>
+            <input type="text" th:field="*{classificacaoIndicativa}" class="form-control" required>
+            <p th:if="${#fields.hasErrors('classificacaoIndicativa')}" class="text text-danger"
+               th:errors="*{classificacaoIndicativa}"></p>
+        </div>
+<button class="btn btn-success">Editar</button>
+</form>
+</div>
+</body>
+</html>

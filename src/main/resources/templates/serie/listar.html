@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Listagem de Series</title>
+</head>
+<body>
+<div class="container" layout:fragment="conteudo">
+    <h1>Lista de Series</h1>
+    <div th:if="!${#strings.isEmpty(msg)}" class="alert alert-success">
+        <span th:text="${msg}"></span>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Genero</th>
+            <th>Ano de lançamento</th>
+            <th>Quantidade de temporadas</th>
+            <th>Classificação indicativa</th>
+        </tr>
+        <tr th:each="serie : ${status}">
+            <td th:text="${serie.nome}"></td>
+            <td th:text="${serie.genero}"></td>
+            <td th:text="${serie.anoLancamento}"></td>
+            <td th:text="${serie.quantidadeTemporadas}"></td>
+            <td th:text="${serie.classificacaoIndicativa}"></td>
+            <td>
+                <a th:href="@{/serie/editar/}+${serie.id}" class="btn btn-sm btn-primary">Editar</a>
+                <button th:onclick="|serieId.value = ${serie.id}|" type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Excluir
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente excluir a Serie?
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/serie/excluir}" method="post">
+                        <input type="hidden" id="serieId" name="idStatus">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-danger">Sim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
